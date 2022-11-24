@@ -1,38 +1,89 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  width: 50%;
+  margin: auto;
+}
+
+#divOne {
+  width: 765px;
+}
+
+.tblOne,
+tr {
+  border: 2px solid grey;
+  border-collapse: collapse;
+  width: 102%;
+  table-layout: fixed;
+}
+
+form {
+  display: flex;
+}
+label {
+  position: relative;
+}
+.todo-input {
+  border: none;
+  padding: 15px;
+  border-radius: 4px 0 0 4px;
+  width: 746px;
+  border-color: lightgray;
+  border: 2px solid gray;
+  border-radius: 6px;
+}
+.todo-input:focus {
+  outline: none;
+}
+.todo-button {
+  position: absolute;
+  top: 0;
+  border: none;
+  right: 0;
+  bottom: 0;
+  padding: 15px;
+  background-color: #0066ff;
   color: white;
+  cursor: pointer;
+  border-radius: 0px 4px 4px 0px;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
 }
 
-.App-link {
-  color: #61dafb;
+th,
+td {
+  text-align: left;
+  padding: 8px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+.RiDeleteBin6Line {
+  color: #f2f2f2;
+  cursor: pointer;
+}
+
+.Faedit {
+  color: #f2f2f2;
+  cursor: pointer;
+}
+.delete {
+  background-color: #ff6666;
+  border-color: #ff6666;
+  border-radius: 3px;
+}
+.edit {
+  background-color: #04aa6d;
+  border-color: #04aa6d;
+  border-radius: 3px;
+  margin: 5px;
+}
+.react-icon {
+  text-align: right;
+}
+.title {
+  width: 2px;
 }
