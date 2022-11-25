@@ -3,7 +3,7 @@ import { FaEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import React from "react";
 
-//to get data from local storage
+//To get data from local storage
 
 const getlocalItems = () => {
   let list = localStorage.getItem("lists");
@@ -13,51 +13,55 @@ const getlocalItems = () => {
     return [];
   }
 };
-export const Todo = (props) => {
+export const Todo = () => {
   const [todos, setTodos] = useState(getlocalItems());
-  const [value, setValue] = useState("");
+  const [inputValue, setInputValue] = useState("");
   const [toggleSubmit, settoggleSubmit] = useState(true);
   const [isEditItem, setIsEditItem] = useState(null);
 
-  //adddata to local storage
+  //add data to local storage
   useEffect(() => {
     localStorage.setItem("lists", JSON.stringify(todos));
   }, [todos]);
 
+  //handel submit function
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!value) {
+    if (!inputValue) {
       alert("Please fill data");
-    } else if (value && !toggleSubmit) {
+    } else if (inputValue && !toggleSubmit) {
       setTodos(
         todos.map((elem) => {
           if (elem.id === isEditItem) {
-            return { ...elem, text: value };
+            return { ...elem, text: inputValue };
           }
           return elem;
         })
       );
       settoggleSubmit(true);
-      setValue("");
+      setInputValue("");
       setIsEditItem(null);
     } else {
       const newTodo = {
         id: new Date().getTime(),
-        text: value,
+        text: inputValue,
         completed: false,
       };
       setTodos([...todos].concat(newTodo));
-      setValue("");
+      setInputValue("");
     }
   };
-  const handleChange = (e) => {
-    setValue(e.target.value);
+  // handle input chnage function
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
   };
-  function deleteTodo(id) {
+
+  //handle delete funtion
+  function onDelete(id) {
     const updateTodos = [...todos].filter((value) => value.id !== id);
     setTodos(updateTodos);
   }
-
+  // handle checkbox function
   function handleCheckboxChange(id) {
     const updateTodos = [...todos].map((value) => {
       if (value.id === id) {
@@ -67,13 +71,15 @@ export const Todo = (props) => {
     });
     setTodos(updateTodos);
   }
-  const editItem = (id) => {
+
+  //Handle on Edit function
+  const onEdit = (id) => {
     const newEditItem = todos.find((elem) => {
       return elem.id === id;
     });
 
     settoggleSubmit(false);
-    setValue(newEditItem.text);
+    setInputValue(newEditItem.text);
     setIsEditItem(id);
   };
 
@@ -91,8 +97,8 @@ export const Todo = (props) => {
                 type="text"
                 name="name"
                 placeholder="Enter todo here"
-                value={value}
-                onChange={handleChange}
+                value={inputValue}
+                onChange={handleInputChange}
               />
               {toggleSubmit ? (
                 <button className="todo-button">Submit</button>
@@ -111,23 +117,17 @@ export const Todo = (props) => {
                   <input
                     type="checkbox"
                     onChange={() => handleCheckboxChange(data.id)}
-                    checked={value.completed}
+                    checked={inputValue.completed}
                   />
                 </td>
 
                 <td className="title">{data.text}</td>
 
                 <td className="react-icon">
-                  <button className="edit" onClick={() => editItem(data.id)}>
-                    <FaEdit
-                      className="Faedit"
-                      onClick={() => editItem(data.id)}
-                    />
+                  <button className="edit" onClick={() => onEdit(data.id)}>
+                    <FaEdit className="Faedit" />
                   </button>
-                  <button
-                    className="delete"
-                    onClick={() => deleteTodo(data.id)}
-           >
+                  <button className="delete" onClick={() => onDelete(data.id)}>
                     <RiDeleteBin6Line className="RiDeleteBin6Line" />
                   </button>
                 </td>
