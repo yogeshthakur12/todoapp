@@ -1,24 +1,42 @@
 .App {
   align-items: center;
   justify-content: center;
-  width: 50%;
+  width: 799px;
   margin: auto;
+  border-radius: 4px;
+  border: 3px solid #E0E0E0		;
+  height: 100%;
+}
+.header{
+  position:   absolute;
+  top:      0px;
+  
+  background: #f00;
+  background-color: #F0F0F0	;
+ border: 2px solid #E0E0E0		;
+ width: 798px;
+ border-radius: 4px;
+ margin-left: -13px;
+
 }
 
-#divOne {
-  width: 765px;
-}
+.header h1{  margin-left: 14px;
+  font-family: 'Times New Roman', Times, serif;}
+
 
 .tblOne,
 tr {
-  border: 2px solid grey;
+  border: 1px solid #E0E0E0		;
   border-collapse: collapse;
-  width: 102%;
+  width: 776px;
   table-layout: fixed;
+  margin-left: 12px;
+  margin-bottom: 37px;
 }
 
 form {
   display: flex;
+  margin: 39px 12px 4px 12px;
 }
 label {
   position: relative;
@@ -27,25 +45,29 @@ label {
   border: none;
   padding: 15px;
   border-radius: 4px 0 0 4px;
-  width: 746px;
-  border-color: lightgray;
-  border: 2px solid gray;
+  width: 743px;
+  font-size: 20px;
+  font-family: 'Times New Roman', Times, serif;
+  border: 1px solid #E0E0E0		;
   border-radius: 6px;
+  margin-top:63px;
 }
 .todo-input:focus {
   outline: none;
 }
 .todo-button {
   position: absolute;
-
+  margin-top:63px;
   border: none;
   right: 0;
-height:49px;
+height:55px;
   padding: 15px;
   background-color: #0066ff;
   color: white;
   cursor: pointer;
   border-radius: 0px 4px 4px 0px;
+  font-size: 20px;
+  font-family: 'Times New Roman', Times, serif;
 }
 table {
   border-collapse: collapse;
@@ -58,7 +80,8 @@ td {
   padding: 8px;
   white-space: nowrap;
   width: fit-content;
-  
+  font-family: 'Times New Roman', Times, serif;
+  color: #595959;
 }
 
 tr:nth-child(odd) {
@@ -67,11 +90,14 @@ tr:nth-child(odd) {
 .RiDeleteBin6Line {
   color: #f2f2f2;
   cursor: pointer;
+  height: 20px;
 }
 
 .Faedit {
   color: #f2f2f2;
   cursor: pointer;
+  height: 20px;
+  
 }
 .delete {
   background-color: #ff6666;
@@ -88,33 +114,6 @@ tr:nth-child(odd) {
   text-align: right;
 }
 .title {
-  width: 2px;
+  width: 70%;
 }
-.div1{
-background-color: #04aa6d;
-width: 746px;
-position: absolute;
-bottom: 0px;
-}
-.div2{
 
-width: 746px;
-position: relative;
-height: 100px;
-}
-.myDiv {
-  border: 5px outset red;
-     
-  
-  width: 746px;
-position: relative;
-
-}
-.myDiv1 {
-    
-  width: 746px;
-  position: absolute;
-  bottom: 0px;
-  top: 60%;
-  
-}

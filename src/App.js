@@ -1,18 +1,12 @@
-
 import "./App.css";
-import {Create} from './components/Create'
-import { Update } from "./components/Update";
-
+import { Todo } from "./components/Todo";
 function App() {
   return (
-     <>
-     <div className="App">
-      <h1>Todos(5)</h1>
-      <Create />
-   
-  </div>
-      </>
-  
+    <>
+      <div className="App">
+        <Todo />
+      </div>
+    </>
   );
 }
 
