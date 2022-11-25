@@ -37,10 +37,10 @@ label {
 }
 .todo-button {
   position: absolute;
-  top: 0;
+
   border: none;
   right: 0;
-  bottom: 0;
+height:49px;
   padding: 15px;
   background-color: #0066ff;
   color: white;
@@ -56,6 +56,9 @@ th,
 td {
   text-align: left;
   padding: 8px;
+  white-space: nowrap;
+  width: fit-content;
+  
 }
 
 tr:nth-child(odd) {
@@ -86,4 +89,32 @@ tr:nth-child(odd) {
 }
 .title {
   width: 2px;
+}
+.div1{
+background-color: #04aa6d;
+width: 746px;
+position: absolute;
+bottom: 0px;
+}
+.div2{
+
+width: 746px;
+position: relative;
+height: 100px;
+}
+.myDiv {
+  border: 5px outset red;
+     
+  
+  width: 746px;
+position: relative;
+
+}
+.myDiv1 {
+    
+  width: 746px;
+  position: absolute;
+  bottom: 0px;
+  top: 60%;
+  
 }

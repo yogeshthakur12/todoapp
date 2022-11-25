@@ -1,18 +1,17 @@
 
 import "./App.css";
-import {ToDoList} from './components/todolist'
 import {Create} from './components/Create'
+import { Update } from "./components/Update";
 
 function App() {
   return (
-    
-      <div className ="App">
-        <h1>Todos(5)</h1>
-        <Create />
-        <br></br>
-        <ToDoList/>
-
-      </div>
+     <>
+     <div className="App">
+      <h1>Todos(5)</h1>
+      <Create />
+   
+  </div>
+      </>
   
   );
 }
