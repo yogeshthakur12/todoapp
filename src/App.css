@@ -82,6 +82,7 @@ td {
   width: fit-content;
   font-family: 'Times New Roman', Times, serif;
   color: #595959;
+  font-size: 20px;
 }
 
 tr:nth-child(odd) {
