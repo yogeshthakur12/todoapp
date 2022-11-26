@@ -164,7 +164,7 @@ export const Todo = () => {
           </table>
         </div>
       </div>
-      <ToastContainer />
+      <ToastContainer theme="colored" />
     </>
   );
 };

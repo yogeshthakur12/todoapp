@@ -120,5 +120,6 @@ tr:nth-child(odd) {
 .red-input {
   accent-color: rgb(168, 157, 157);
   height: 20px; 
+  width:20px;
 }
 
