@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import React from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 //To get data from local storage
-
+const notify = () => toast();
 const getlocalItems = () => {
   let list = localStorage.getItem("lists");
   if (list) {
@@ -19,29 +21,45 @@ export const Todo = () => {
   const [toggleSubmit, settoggleSubmit] = useState(true);
   const [isEditItem, setIsEditItem] = useState(null);
 
-  //add data to local storage
+  /*----------Add data to local storage----------*/
   useEffect(() => {
     localStorage.setItem("lists", JSON.stringify(todos));
   }, [todos]);
 
-  //handel submit function
+  /*----------handle submit function----------*/
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!inputValue) {
-      alert("Please fill data");
+      toast.error("Please enter Task", {
+        theme: "colored",
+        position: "top-center",
+      });
     } else if (inputValue && !toggleSubmit) {
+      toast("Task updated successfully", {
+        theme: "light",
+        position: "top-center",
+      });
       setTodos(
         todos.map((elem) => {
           if (elem.id === isEditItem) {
-            return { ...elem, text: inputValue };
+            return {
+              ...elem,
+              text: inputValue,
+            };
           }
+
           return elem;
         })
       );
       settoggleSubmit(true);
+
       setInputValue("");
       setIsEditItem(null);
     } else {
+      toast("Task added successfully", {
+        theme: "light",
+        position: "top-center",
+      });
       const newTodo = {
         id: new Date().getTime(),
         text: inputValue,
@@ -51,28 +69,37 @@ export const Todo = () => {
       setInputValue("");
     }
   };
-  // handle input chnage function
+
+  /*----------handle input value  ----------*/
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
 
-  //handle delete funtion
+  /*----------handle delete the todo Tasks----------*/
   function onDelete(id) {
     const updateTodos = [...todos].filter((value) => value.id !== id);
     setTodos(updateTodos);
+    onclick = { notify };
+    toast("Task Removed Successfully!", {
+      theme: "light",
+      position: "top-center", text:'green'
+    });
   }
-  // handle checkbox function
+
+  /*------handle checkbox to mark Task True/False----------*/
   function handleCheckboxChange(id) {
     const updateTodos = [...todos].map((value) => {
       if (value.id === id) {
-        value.completed = !value.completed;
+        return { ...value, completed: !value.completed };
       }
+
       return value;
     });
+
     setTodos(updateTodos);
   }
 
-  //Handle on Edit function
+  /*----------Handle Update the Todo Tasks---------*/
   const onEdit = (id) => {
     const newEditItem = todos.find((elem) => {
       return elem.id === id;
@@ -103,7 +130,7 @@ export const Todo = () => {
               {toggleSubmit ? (
                 <button className="todo-button">Submit</button>
               ) : (
-                <button className="todo-button">Edit</button>
+                <button className="todo-button">Update</button>
               )}
             </label>
           </div>
@@ -115,9 +142,10 @@ export const Todo = () => {
               <tr key={data.id}>
                 <td className="checkbox">
                   <input
+                    className="red-input"
                     type="checkbox"
-                    onChange={() => handleCheckboxChange(data.id)}
-                    checked={inputValue.completed}
+                    onClick={() => handleCheckboxChange(data.id)}
+                    checked={data.completed}
                   />
                 </td>
 
@@ -136,6 +164,7 @@ export const Todo = () => {
           </table>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };

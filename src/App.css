@@ -117,4 +117,8 @@ tr:nth-child(odd) {
 .title {
   width: 70%;
 }
+.red-input {
+  accent-color: rgb(168, 157, 157);
+  height: 20px; 
+}
 
