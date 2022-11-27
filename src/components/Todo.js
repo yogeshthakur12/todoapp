@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import React from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 //To get data from local storage
 const notify = () => toast();
@@ -164,7 +163,7 @@ export const Todo = () => {
           </table>
         </div>
       </div>
-      <ToastContainer theme="colored" />
+      {/* <ToastContainer theme="colored" /> */}
     </>
   );
 };

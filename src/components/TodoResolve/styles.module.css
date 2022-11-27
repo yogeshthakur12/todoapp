@@ -1,0 +1,125 @@
+.todoHeader {
+  padding: 20px;
+  background-color: #f0f0f0;
+}
+
+.todoHeader h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.todoMainBox {
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  /* ? overflow hidden to make nothing appear when we apply radius on the corners */
+  overflow: hidden;
+  box-shadow: 0px 2px 10px #f2f2f2;
+  margin: 2px auto;
+  max-width: 900px;
+}
+
+.todoInfoBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 5px;
+  border-bottom: 1px solid #f0f0f0;
+  border-inline: 1px solid #f0f0f0;
+}
+
+.todoInfoBox:first-child {
+  border-top: 1px solid #f0f0f0;
+}
+
+.todoInfoBox:nth-child(2n+1) {
+  background-color: #f0f0f0;
+}
+
+.todoTextBox {
+  /* ? flex to let the element take the rest space between elements at same tree */
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ? checkbox input */
+.todoTextBox input[type="checkbox"] {
+  margin: 0;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.todoTextBox label {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+  cursor: pointer;
+}
+
+.iconsBox {
+  display: flex;
+  align-items: center;
+  gap: 4px
+}
+
+.iconsBox svg {
+  width: 15px;
+  height: 15px;
+  padding: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.iconsBox [class*="editIcon"] {
+  color: #096d00c4;
+}
+
+.iconsBox [class*="editIcon"]:hover {
+  background-color: #096d00c4;
+  color: #fff;
+}
+
+.iconsBox [class*="deleteIcon"] {
+  color: #e90b16bd;
+}
+
+
+.iconsBox [class*="deleteIcon"]:hover {
+  background-color: #e90b16bd;
+  color: #fff;
+}
+
+.formBox {
+  padding: 10px 20px;
+  margin: 0;
+  border: 1px solid #f0f0f0;
+  display: flex;
+}
+
+.formBox input[class*="textInput"] {
+  padding: 8px;
+  outline: none;
+  flex: 1;
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+}
+
+.formBox button[type="submit"] {
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 5px 20px;
+  background-color: #0066ff;
+  font-size: 16px;
+  color: #fff;
+}
+
+.formBox button[type="submit"]:hover {
+  background-color: #0066ffca;
+}
+
+.formBox input[class*="textInput"]:focus {
+  border-color: #ddd;
+}
