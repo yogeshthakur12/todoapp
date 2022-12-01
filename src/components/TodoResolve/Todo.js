@@ -7,10 +7,10 @@ import styles from "./styles.module.css";
 import TodoInfo from "./TodoInfo";
 import FormInput from "../atoms/input";
 const INIT_LIST = [
-  { name: "API call", summary: "xyz", id: "1", completed: false },
-  { name: "Reuseable component", summary: "xyz", id: "2", completed: false },
-  { name: "React-redux", summary: "xyz", id: "3", completed: false },
-  { name: "javascript", summary: "xyz", id: "4", completed: true },
+  { name: "API call", summary: " task desciption...", id: "1", completed: false },
+  { name: "Reuseable component", summary: "task desciption...", id: "2", completed: false },
+  { name: "React-redux", summary: "task desciption...", id: "3", completed: false },
+  { name: "javascript", summary: "task desciption...", id: "4", completed: true },
 ];
 
 const Todo = (props) => {

@@ -14,12 +14,14 @@ const FormInput = ({
     defaultValue,
     defaultChecked,
     required,
+    onfocus,
     ...props
   }) => {
     
     return (
       <React.Fragment>
-        <label htmlFor={name}><b>{label}</b></label>
+        <label htmlFor={name}>{label}</label>
+        
         <input
           id={name}
           name={name}
@@ -31,7 +33,9 @@ const FormInput = ({
           defaultValue={defaultValue}
           defaultChecked={defaultChecked}
         required={required}
+        onfocus={onfocus}
           style={error && {border: 'solid 1px red'}}
+        
         />
         { error && <p>{ error }</p>}
       </React.Fragment>

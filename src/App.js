@@ -5,9 +5,14 @@ import Todo from "./components/TodoResolve";
 function App() {
   return (
     <>
-    
+     <div className="container">
       <div className="App">
-      <Todo/>
+       
+
+        <Todo/>
+
+        </div>
+      
       </div>
       
     </>

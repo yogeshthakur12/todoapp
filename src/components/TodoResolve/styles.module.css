@@ -56,6 +56,12 @@
   height: 16px;
   cursor: pointer;
 }
+.containerformBox input[type="checkbox"] {
+  margin:9px;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
 
 .todoTextBox label {
   font-size: 16px;
@@ -121,15 +127,25 @@ svg Searchicon {
   border: 1px solid #f1f1f1;
   margin-bottom: 25px;
 }
-.containerformBox  input[type=text], textarea {
-  width: 90%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  display: inline-block;
-  border: none;
-  background: #f1f1f1;
-  border:1px solid grey
+.containerformBox  input[type=text],  input[type=text], textarea {
+  cursor: text;
+    flex-grow: 1;
+    outline: grey;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #e2e6e9;
+    color: #06062b;
+    color: var(--color-natural-black-default);
+    caret-color: #06062b;
+    caret-color: var(--color-natural-black-default);
+    width: 90%;
+    margin: 5px 0 22px 0;
+    display: inline-block;
 }
+ 
+ 
+
+
 .headerFormBox{
   display: flex;
   justify-content: space-between;
@@ -137,11 +153,10 @@ svg Searchicon {
 }
 .formBox input[class*="textInput"] {
   padding: 8px;
-  outline: none;
-  flex: 1;
 
+  flex: 1;
   border-radius: 4px;
-  width:545px;
+
 border: 1px solid #e2e6e9;
   margin-left:16px;
   margin-right: 16px;
@@ -159,6 +174,7 @@ border: 1px solid #e2e6e9;
     position:absolute;
     top: 0;
     margin:-27px;
+    z-index: 1;
 }
 .popupBox{
   height: 400px;
@@ -179,21 +195,8 @@ border: 1px solid #e2e6e9;
   margin-top:1px;
   height:36px;
 }
-
-
-
-.formBox input[class*="textInput"]:focus textarea[class*="textInput"]:focus {
- 
-  width:700px;
-  border:1px solid #e2e6e9
-}
-
-
-
-.containerformBox input[type=text]:focus textarea:focus {
-  background-color: #ddd;
-  outline: none;
-  border:1px solid #e2e6e9
+.button{
+  background-color: #26759e;
 }
 .button:hover {
   border: 1px solid #1c5675;
@@ -208,4 +211,6 @@ border: 1px solid #e2e6e9;
     color-stop(100%, #133d5b)
   );
 }
-
+input:focus::placeholder,textarea:focus::placeholder{
+  color:lightgrey;
+}

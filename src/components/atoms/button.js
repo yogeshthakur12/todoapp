@@ -18,6 +18,7 @@ const Button = ({
       onClick={clickHandler}
       type={type}
       disabled={isDisabled}
+      
     >
       {value}
     </button>
