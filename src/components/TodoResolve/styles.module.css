@@ -1,3 +1,7 @@
+*{
+  text-align: center;
+}
+
 .todoHeader {
   padding: 20px;
   background-color: #f0f0f0;
@@ -17,6 +21,7 @@
   margin: 2px auto;
   max-width: 900px;
 }
+
 
 .todoInfoBox {
   display: flex;
@@ -41,6 +46,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  width:400px;
 }
 
 /* ? checkbox input */
@@ -65,8 +71,8 @@
 }
 
 .iconsBox svg {
-  width: 15px;
-  height: 15px;
+  width: 30px;
+  height: 30px;
   padding: 5px;
   border-radius: 4px;
   cursor: pointer;
@@ -96,17 +102,73 @@
   margin: 0;
   border: 1px solid #f0f0f0;
   display: flex;
+  width: 756px;
+}
+svg Searchicon {
+  width:30px;
+  height:30px;
+  margin-left: 40px;
+  background-color: #ddd;
+  color: blue;
+}
+.containerformBox {
+
+ padding: 16px;
+    background-color: white;
 }
 
+.containerformBox hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+.containerformBox  input[type=text], textarea {
+  width: 90%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+  border:1px solid grey
+}
+.headerFormBox{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 30px 0 15px;
+}
 .formBox input[class*="textInput"] {
   padding: 8px;
   outline: none;
   flex: 1;
-  border: 1px solid #f0f0f0;
-  border-radius: 4px;
-}
 
-.formBox button[type="submit"] {
+  border-radius: 4px;
+  width:545px;
+border: 1px solid #e2e6e9;
+  margin-left:16px;
+  margin-right: 16px;
+  height: 17px;
+    margin-top: 1px;
+
+}
+.headerFormBox h1{
+  font-size:20px;
+}
+.mainformbox {
+  background-color: rgba(124, 128, 131, 0.71);
+    height: 100%;
+    width: 51%;
+    position:absolute;
+    top: 0;
+    margin:-27px;
+}
+.popupBox{
+  height: 400px;
+  width: 50%;
+  background-color: white;
+  position: absolute;
+  top: 10%;
+  right: 25%;
+}
+.formBox .button[type="submit"] {
   border: 1px solid #f0f0f0;
   border-radius: 4px;
   cursor: pointer;
@@ -114,12 +176,36 @@
   background-color: #0066ff;
   font-size: 16px;
   color: #fff;
+  margin-top:1px;
+  height:36px;
 }
 
-.formBox button[type="submit"]:hover {
-  background-color: #0066ffca;
+
+
+.formBox input[class*="textInput"]:focus textarea[class*="textInput"]:focus {
+ 
+  width:700px;
+  border:1px solid #e2e6e9
 }
 
-.formBox input[class*="textInput"]:focus {
-  border-color: #ddd;
+
+
+.containerformBox input[type=text]:focus textarea:focus {
+  background-color: #ddd;
+  outline: none;
+  border:1px solid #e2e6e9
 }
+.button:hover {
+  border: 1px solid #1c5675;
+
+  background-color: #26759e;
+
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0%, #26759e),
+    color-stop(100%, #133d5b)
+  );
+}
+

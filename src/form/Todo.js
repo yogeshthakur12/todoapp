@@ -87,13 +87,14 @@ export const Todo = () => {
 
   /*------handle checkbox to mark Task True/False----------*/
   function handleCheckboxChange(id) {
-    const updateTodos = [...todos].map((value) => {
-      if (value.id === id) {
-        return { ...value, completed: !value.completed };
+    const updateTodos = todos.map((value) => 
+      value.id === id ? {
+         ...value, completed: !value.completed ,
       }
-
-      return value;
-    });
+      :
+      value
+    
+    );
 
     setTodos(updateTodos);
   }

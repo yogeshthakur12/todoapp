@@ -1,21 +1,48 @@
 import React from "react";
 import { toast } from "react-toastify";
-import Form from "./Form";
-import Header from "./Header";
+import Button from "../atoms/button";
+import Form from "./TodoForm";
+import Header from "./TodoHeader";
 import styles from "./styles.module.css";
 import TodoInfo from "./TodoInfo";
-
+import FormInput from "../atoms/input";
 const INIT_LIST = [
-  { name: "task 1", id: "1", completed: false },
-  { name: "task 2", id: "2", completed: false },
-  { name: "task 3", id: "3", completed: false },
+  { name: "API call", summary: "xyz", id: "1", completed: false },
+  { name: "Reuseable component", summary: "xyz", id: "2", completed: false },
+  { name: "React-redux", summary: "xyz", id: "3", completed: false },
+  { name: "javascript", summary: "xyz", id: "4", completed: true },
 ];
-const Todo = () => {
+
+const Todo = (props) => {
+  const [open, setOpen] = React.useState(false);
   const [todoList, setTodoList] = React.useState(INIT_LIST);
+
   const [currentTodo, setCurrentTodo] = React.useState(null);
 
+  const handleSearch = (e) => {
+    if (e.target.value === "") {
+      window.location.reload(true);
+      const temdata = todoList;
+      setTodoList(temdata);
+      return;
+    }
+
+    const result = todoList.filter((val) =>
+      val.name.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+
+    setTodoList(result);
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const closePopup = () => {
+    setOpen(false);
+    setCurrentTodo(null);
+  };
   const handleDelete = (id) => {
-    if (window.confirm('are you sure you want to delete this task?')) {
+    if (window.confirm("are you sure you want to delete this task?")) {
       const result = todoList.filter((todo) => todo.id !== id);
       setTodoList(result);
     }
@@ -26,8 +53,7 @@ const Todo = () => {
     const newId = todoList.length + 1;
     const newTodo = {
       id: newId,
-      name: obj?.name,
-      completed: false,
+      ...obj,
     };
 
     const result = [newTodo, ...todoList];
@@ -37,7 +63,7 @@ const Todo = () => {
   const handleUpdate = (obj) => {
     const newTodo = {
       ...currentTodo,
-      name: obj?.name,
+      ...obj,
     };
 
     const result = todoList.map((todo) =>
@@ -46,57 +72,95 @@ const Todo = () => {
     setTodoList(result);
   };
 
-  const handleSubmit = (inputData, form) => {
+  const handleSubmit = (values, form) => {
     // * inputData comes from the form
     // * form comes from the form object which contain everything
 
     // validations
-    if (!inputData?.trim()) {
-      toast.error('task name is invalid', '')
+    if (!values.name.trim()) {
+      toast.error("task name is invalid", "");
       return; // ? this will stop the process
     }
 
     // ? submission accept two cases add or update todo
     if (Boolean(currentTodo)) {
       // ? in case we have data on currentTodo that mean user clicked edit icon
-      handleUpdate({ name: inputData });
-      setCurrentTodo(null)
-      form.reset();
+      handleUpdate({ name: values.name, summary: values.summary, completed:values.completed});
+      setCurrentTodo(null);
     } else {
       // ? otherwise just add new todo
-      handleAddNew({ name: inputData });
-      form.reset();
+      handleAddNew({ name: values.name, summary: values.summary, completed:values.completed });
     }
+    setOpen(false);
+    form.reset();
   };
 
   const handleOnComplete = (id) => {
     const result = todoList.map((todo) =>
-      todo.id === id ? {
-        ...todo,
-        completed: !todo.completed,
-      }
-      : todo
+      todo.id === id
+        ? {
+            ...todo,
+            completed: !todo.completed,
+          }
+        : todo
     );
-    setTodoList(result)
+    setTodoList(result);
   };
 
+  
   return (
     <div className={styles.todoMainBox}>
       <Header tasksNumber={todoList?.length} />
-      <Form onSubmit={handleSubmit} initialValues={currentTodo} />
+      <div className={styles.formBox}>
+        <Button 
+        id={"btnSave"}
+        type={"Submit"}
+        value={"Add Task"}
+        isDisabled={false}
+        clickHandler={handleClickOpen}
+        className={styles.button}
+        />
+        
+<FormInput 
+type="text"
+className="textInput"
+name="task_name"
+placeholder="Search todo Tasks..."
+onFocus={(e) => (e.target.placeholder = "")}
+onBlur={(e) => (e.target.placeholder = "Search todo Tasks...")}
+onChange={handleSearch}
+
+
+/>
+       
+      
+      </div>
+      <Form
+        onSubmit={handleSubmit}
+        initialValues={currentTodo || {}}
+        handleClickOpen={handleClickOpen}
+        closePopup={closePopup}
+        open={open}
+        SearchTerm
+      />
       {/* ? todo body */}
       <div>
-        {todoList?.length === 0 && <p>no tasks</p>}
-
-        {todoList?.map((todo) => (
-          <TodoInfo
-            key={todo.id}
-            task={todo}
-            onComplete={() => handleOnComplete(todo.id)}
-            onDelete={() => handleDelete(todo.id)}
-            onEdit={() => setCurrentTodo(todo)}
-          />
-        ))}
+        {todoList?.length > 0 ? (
+          todoList?.map((todo) => (
+            <TodoInfo
+              key={todo.id}
+              task={todo}
+              onComplete={() => handleOnComplete(todo.id)}
+              onDelete={() => handleDelete(todo.id)}
+              onEdit={() => {
+                handleClickOpen();
+                setCurrentTodo(todo);
+              }}
+            />
+          ))
+        ) : (
+          <p>no tasks</p>
+        )}
       </div>
     </div>
   );
