@@ -14,7 +14,7 @@ const FormInput = ({
     defaultValue,
     defaultChecked,
     required,
-    onfocus,
+    
     ...props
   }) => {
     
@@ -33,7 +33,7 @@ const FormInput = ({
           defaultValue={defaultValue}
           defaultChecked={defaultChecked}
         required={required}
-        onfocus={onfocus}
+      
           style={error && {border: 'solid 1px red'}}
         
         />
@@ -49,8 +49,8 @@ const FormInput = ({
   
   FormInput.propTypes = {
     name: PropTypes.string.isRequired,
-   
-    placeholder: PropTypes.string.isRequired,
+    required:PropTypes.bool,
+    placeholder: PropTypes.string,
     type: PropTypes.oneOf(['text', 'number', 'password','checkbox']),
     className: PropTypes.string,
     value: PropTypes.any,

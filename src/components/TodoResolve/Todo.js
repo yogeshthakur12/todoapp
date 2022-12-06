@@ -1,23 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { toast } from "react-toastify";
-import Button from "../atoms/button";
+
 import Form from "./TodoForm";
 import Header from "./TodoHeader";
 import styles from "./styles.module.css";
 import TodoInfo from "./TodoInfo";
-import FormInput from "../atoms/input";
-const INIT_LIST = [
-  { name: "API call", summary: " task desciption...", id: "1", completed: false },
-  { name: "Reuseable component", summary: "task desciption...", id: "2", completed: false },
-  { name: "React-redux", summary: "task desciption...", id: "3", completed: false },
-  { name: "javascript", summary: "task desciption...", id: "4", completed: true },
-];
 
 const Todo = (props) => {
   const [open, setOpen] = React.useState(false);
-  const [todoList, setTodoList] = React.useState(INIT_LIST);
+  const [todoList, setTodoList] = React.useState([]);
 
   const [currentTodo, setCurrentTodo] = React.useState(null);
+
+  useEffect(() => {
+    fetchTodoList();
+  }, []);
+
+  /* Fetch all the list data */
+  const fetchTodoList = () => {
+    fetch("https://jsonplaceholder.typicode.com/todos")
+      .then((todo) => todo.json())
+      .then((todo) => setTodoList(todo));
+  };
 
   const handleSearch = (e) => {
     if (e.target.value === "") {
@@ -28,7 +32,7 @@ const Todo = (props) => {
     }
 
     const result = todoList.filter((val) =>
-      val.name.toLowerCase().includes(e.target.value.toLowerCase())
+      val.title.toLowerCase().includes(e.target.value.toLowerCase())
     );
 
     setTodoList(result);
@@ -41,35 +45,86 @@ const Todo = (props) => {
     setOpen(false);
     setCurrentTodo(null);
   };
+
+  /* Delete data */
   const handleDelete = (id) => {
-    if (window.confirm("are you sure you want to delete this task?")) {
-      const result = todoList.filter((todo) => todo.id !== id);
-      setTodoList(result);
-    }
+    fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+      method: "DELETE",
+    }).then((res) => {
+      if (res.status !== 200) {
+        return;
+      } else window.confirm("are you sure you want to delete this task?");
+      {
+        const result = todoList.filter((todo) => todo.id !== id);
+        setTodoList(result);
+      }
+    });
   };
 
-  const handleAddNew = (obj) => {
-    // ? organize the shape of the todo object
-    const newId = todoList.length + 1;
-    const newTodo = {
-      id: newId,
-      ...obj,
-    };
-
-    const result = [newTodo, ...todoList];
-    setTodoList(result);
+  /* create  task using Post API */
+  const handleAddNew =  (obj) => {
+     fetch("https://jsonplaceholder.typicode.com/todos", {
+      method: "POST",
+      body: JSON.stringify({
+        title: obj.title,
+        completed: obj?.completed,
+        userid:1
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => {
+        if (response.status !== 201) {
+          return;
+        } else {
+          return response.json();
+        }
+      })
+      .then((data) => {
+        setTodoList((todoList) => [...todoList, data]);
+      })
+      .catch((error) => console.log(error));
   };
 
-  const handleUpdate = (obj) => {
-    const newTodo = {
-      ...currentTodo,
-      ...obj,
-    };
+  /* update the task using Put method */
 
-    const result = todoList.map((todo) =>
-      todo.id === currentTodo.id ? newTodo : todo
-    );
-    setTodoList(result);
+  const handleUpdate =  (obj) => {
+     fetch(
+      `https://jsonplaceholder.typicode.com/users/` + currentTodo.id,
+      {
+        method: "PUT",
+        body: JSON.stringify({
+          title: obj.title,
+          completed: obj?.completed,
+          userid:1
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }
+    )
+      .then((response) => {
+        if (response.status !== 200) {
+          return;
+        } else {
+          return response.json();
+        }
+      })
+      .then((data) => {
+        // setUsers((users) => [...users, data]);
+        const updatedUsers = todoList.map((todo) => {
+          if (todo.id === currentTodo.id) {
+            todo.title = obj.title;
+            todo.completed = obj.completed;
+          }
+
+          return todo;
+        });
+
+        setTodoList((todoList) => updatedUsers);
+      })
+      .catch((error) => console.log(error));
   };
 
   const handleSubmit = (values, form) => {
@@ -77,7 +132,7 @@ const Todo = (props) => {
     // * form comes from the form object which contain everything
 
     // validations
-    if (!values.name.trim()) {
+    if (!values.title.trim()) {
       toast.error("task name is invalid", "");
       return; // ? this will stop the process
     }
@@ -85,14 +140,22 @@ const Todo = (props) => {
     // ? submission accept two cases add or update todo
     if (Boolean(currentTodo)) {
       // ? in case we have data on currentTodo that mean user clicked edit icon
-      handleUpdate({ name: values.name, summary: values.summary, completed:values.completed});
+      handleUpdate({
+        title: values.title,
+
+        completed: values?.completed,
+      });
       setCurrentTodo(null);
     } else {
       // ? otherwise just add new todo
-      handleAddNew({ name: values.name, summary: values.summary, completed:values.completed });
+      handleAddNew({
+        title: values.title,
+
+        completed: values?.completed,
+      });
     }
     setOpen(false);
-    form.reset();
+   
   };
 
   const handleOnComplete = (id) => {
@@ -107,46 +170,23 @@ const Todo = (props) => {
     setTodoList(result);
   };
 
-  
   return (
     <div className={styles.todoMainBox}>
       <Header tasksNumber={todoList?.length} />
-      <div className={styles.formBox}>
-        <Button 
-        id={"btnSave"}
-        type={"Submit"}
-        value={"Add Task"}
-        isDisabled={false}
-        clickHandler={handleClickOpen}
-        className={styles.button}
-        />
-        
-<FormInput 
-type="text"
-className="textInput"
-name="task_name"
-placeholder="Search todo Tasks..."
-onFocus={(e) => (e.target.placeholder = "")}
-onBlur={(e) => (e.target.placeholder = "Search todo Tasks...")}
-onChange={handleSearch}
-
-
-/>
-       
       
-      </div>
       <Form
         onSubmit={handleSubmit}
         initialValues={currentTodo || {}}
         handleClickOpen={handleClickOpen}
         closePopup={closePopup}
         open={open}
-        SearchTerm
+        handleSearch={handleSearch}
       />
       {/* ? todo body */}
       <div>
         {todoList?.length > 0 ? (
-          todoList?.map((todo) => (
+          todoList?.slice()  
+          .reverse().map((todo) => (
             <TodoInfo
               key={todo.id}
               task={todo}
@@ -156,6 +196,9 @@ onChange={handleSearch}
                 handleClickOpen();
                 setCurrentTodo(todo);
               }}
+              
+                
+            
             />
           ))
         ) : (

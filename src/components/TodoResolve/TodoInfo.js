@@ -1,18 +1,23 @@
 import React from 'react';
 import { HiOutlineTrash, HiPencilAlt } from 'react-icons/hi'
 import styles from './styles.module.css';
+
 const TodoInfo = (props) => {
-  const { task ,initialValues} = props;
+  const { task} = props;
   const randomId = React.useId();
 
   return (
     // ? box will be flex
-    <div className={styles.todoInfoBox}>
-      <div className={styles.todoTextBox}>
-        <input type="checkbox" id={randomId}   onChange={() => props.onComplete()}  defaultChecked={initialValues?.completed}/>
-        <label  htmlFor={randomId}>{task?.name}</label>
-        <label htmlFor={randomId}>{task?.summary}</label>
+    <div className={styles.todoInfoBox} style={task?.completed===true ? {backgroundColor:'#99ffbb'} : {textDecoration:'none'}}>
+      <div   className={styles.todoTextBox}>
+      
+     
+      <label  htmlFor={randomId} >{task?.title}</label>
       </div>
+  
+       
+        
+     
 
       <div className={styles.iconsBox}>
         <HiOutlineTrash onClick={() => props.onDelete()} className="editIcon" />

@@ -2,13 +2,13 @@ import styles from "./styles.module.css";
 import React from "react";
 import Button from "../atoms/button";
 import FormInput from "../atoms/input";
-import { GrFormClose } from 'react-icons/gr' 
+import { GrFormClose } from "react-icons/gr";
 
 const Form = (props) => {
-  const { initialValues, closePopup, open } = props;
+  const { initialValues, closePopup, open, handleClickOpen, handleSearch } =
+    props;
   const [formvalues, setFormvalues] = React.useState({
-    name: initialValues.name || "",
-    summary: initialValues.summary || "",
+    name: initialValues.title || "",
     completed: initialValues.completed || false,
   });
 
@@ -18,7 +18,6 @@ const Form = (props) => {
     // ! there is other way to handle this but this the easiest way bcz there is only 2 element on the form input and btn
 
     props.onSubmit(formvalues);
-    
   };
   const handleNameChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -30,6 +29,24 @@ const Form = (props) => {
 
   return (
     <>
+      <div className={styles.formBox}>
+        <Button
+          id={"btnSave"}
+          type={"Submit"}
+          value={"Add Task"}
+          isDisabled={false}
+          clickHandler={handleClickOpen}
+          className={styles.button}
+        />
+
+        <FormInput
+          type="text"
+          className="textInput"
+          name="task_name"
+          placeholder="Search todo Tasks..."
+          onChange={handleSearch}
+        />
+      </div>
       <form
         onSubmit={handleSubmit}
         className={styles.formBox}
@@ -41,43 +58,36 @@ const Form = (props) => {
               <div className={styles.mainformbox}>
                 <div className={styles.popupBox}>
                   <div className={styles.headerFormBox}>
-                    <p> {initialValues.id ? "Update New Task" : "Add New Task"} </p>
-                    <h1 onClick={closePopup} style={{cursor: "pointer"}}><GrFormClose/></h1>
+                    <p>
+                      {" "}
+                      {initialValues.id
+                        ? "Update New Task"
+                        : "Add New Task"}{" "}
+                    </p>
+                    <h1 onClick={closePopup} style={{ cursor: "pointer" }}>
+                      <GrFormClose />
+                    </h1>
                   </div>
                   <div className={styles.containerformBox}>
                     <hr />
                     <FormInput
                       type={"text"}
                       placeholder={"Enter Task name.."}
-                      name={"name"}
-                      defaultValue={initialValues?.name}
+                      name={"title"}
+                      defaultValue={initialValues?.title}
                       onChange={handleNameChange}
-                     required
                       label={"Task Name"}
                       autocomplete="off"
-                     
+                      required={true}
                     />
 
-                    <label htmlFor="summary">
-                      <span>Task Summary</span>
-                    </label>
-                    <textarea
-                      placeholder="Enter Task Summary"
-                      defaultValue={initialValues?.summary}
-                      onChange={handleNameChange}
-                      name="summary"
-                      required
-                      autocomplete="off"
-                    />
                     <FormInput
                       type={"checkbox"}
                       name="completed"
-              
                       defaultChecked={initialValues?.completed}
                       onChange={handleNameChange}
-                      
-                     
                       label="Completed"
+                  
                     />
                     <hr />
 
@@ -87,12 +97,11 @@ const Form = (props) => {
                       value={initialValues.id ? "Update" : "Add"}
                       className={styles.button}
                     />
-                    
-                  
                   </div>
                 </div>
               </div>
             ) : (
+              
               ""
             )}
           </div>
