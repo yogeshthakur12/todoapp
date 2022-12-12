@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './styles.module.css';
+import styles from '../styles.module.css';
 
 const Header = (props) => {
   // ? 0 is the initial value of the tasksNumber

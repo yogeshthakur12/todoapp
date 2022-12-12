@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 
 import Form from "./TodoForm";
 import Header from "./TodoHeader";
-import styles from "./styles.module.css";
+import styles from '../styles.module.css';
 import TodoInfo from "./TodoInfo";
 
 const Todo = (props) => {
@@ -95,8 +95,7 @@ const Todo = (props) => {
       {
         method: "PUT",
         body: JSON.stringify({
-          title: obj.title,
-          completed: obj?.completed,
+         ...obj,
           userid:1
         }),
         headers: {
@@ -122,7 +121,7 @@ const Todo = (props) => {
           return todo;
         });
 
-        setTodoList((todoList) => updatedUsers);
+        setTodoList(updatedUsers);
       })
       .catch((error) => console.log(error));
   };
@@ -155,7 +154,7 @@ const Todo = (props) => {
       });
     }
     setOpen(false);
-   
+   form.reset();
   };
 
   const handleOnComplete = (id) => {
@@ -183,13 +182,14 @@ const Todo = (props) => {
         handleSearch={handleSearch}
       />
       {/* ? todo body */}
-      <div>
+      <div className={styles.todocontainer}>
         {todoList?.length > 0 ? (
-          todoList?.slice()  
+          todoList?.slice(0,20)  
           .reverse().map((todo) => (
             <TodoInfo
               key={todo.id}
               task={todo}
+              title={todo.title}
               onComplete={() => handleOnComplete(todo.id)}
               onDelete={() => handleDelete(todo.id)}
               onEdit={() => {

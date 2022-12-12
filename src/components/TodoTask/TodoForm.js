@@ -1,8 +1,8 @@
-import styles from "./styles.module.css";
+import styles from '../styles.module.css';
 import React from "react";
 import Button from "../atoms/button";
 import FormInput from "../atoms/input";
-import { GrFormClose } from "react-icons/gr";
+import {TfiClose} from "react-icons/tfi";
 
 const Form = (props) => {
   const { initialValues, closePopup, open, handleClickOpen, handleSearch } =
@@ -30,21 +30,24 @@ const Form = (props) => {
   return (
     <>
       <div className={styles.formBox}>
-        <Button
+       
+ 
+  <FormInput
+          type="text"
+          className="textInput"
+          name="task_name"
+          placeholder="Search todo Tasks..."
+          onChange={handleSearch}
+        />
+      
+       
+         <Button
           id={"btnSave"}
           type={"Submit"}
           value={"Add Task"}
           isDisabled={false}
           clickHandler={handleClickOpen}
           className={styles.button}
-        />
-
-        <FormInput
-          type="text"
-          className="textInput"
-          name="task_name"
-          placeholder="Search todo Tasks..."
-          onChange={handleSearch}
         />
       </div>
       <form
@@ -65,11 +68,11 @@ const Form = (props) => {
                         : "Add New Task"}{" "}
                     </p>
                     <h1 onClick={closePopup} style={{ cursor: "pointer" }}>
-                      <GrFormClose />
+                    <TfiClose/>
                     </h1>
                   </div>
                   <div className={styles.containerformBox}>
-                    <hr />
+                   
                     <FormInput
                       type={"text"}
                       placeholder={"Enter Task name.."}
@@ -86,17 +89,19 @@ const Form = (props) => {
                       name="completed"
                       defaultChecked={initialValues?.completed}
                       onChange={handleNameChange}
-                      label="Completed"
+                     label={"completed"}
                   
                     />
-                    <hr />
-
+                    
+                  <div className={styles.buttonsave}>
                     <Button
                       id={"btnSave"}
                       type={"Submit"}
-                      value={initialValues.id ? "Update" : "Add"}
+                      
+                      value={"Save"}
                       className={styles.button}
                     />
+                    </div>
                   </div>
                 </div>
               </div>

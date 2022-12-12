@@ -7,7 +7,7 @@ const Button = ({
   className,
   clickHandler,
   type,
-  isDisabled,
+  disabled,
   value,
   ...props
 }) => {
@@ -17,7 +17,7 @@ const Button = ({
       className={className}
       onClick={clickHandler}
       type={type}
-      disabled={isDisabled}
+      disabled={disabled}
       
     >
       {value}
