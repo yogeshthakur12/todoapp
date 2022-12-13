@@ -1,125 +1,85 @@
-.App {
-  align-items: center;
-  justify-content: center;
-  width: 799px;
-  margin: auto;
-  border-radius: 4px;
-  border: 3px solid #E0E0E0		;
-  height: 100%;
-}
-.header{
-  position:   absolute;
-  top:      0px;
-  
-  background: #f00;
-  background-color: #F0F0F0	;
- border: 2px solid #E0E0E0		;
- width: 798px;
- border-radius: 4px;
- margin-left: -13px;
-
+*{
+  margin:0;
+  padding:0;
+  text-decoration: none;
+    font-family: effra-arabic;
 }
 
-.header h1{  margin-left: 14px;
-  font-family: 'Times New Roman', Times, serif;}
-
-
-.tblOne,
-tr {
-  border: 1px solid #E0E0E0		;
-  border-collapse: collapse;
-  width: 776px;
-  table-layout: fixed;
-  margin-left: 12px;
-  margin-bottom: 37px;
+.container{
+  display:flex;
 }
-
-form {
-  display: flex;
-  margin: 39px 12px 4px 12px;
-}
-label {
-  position: relative;
-}
-.todo-input {
-  border: none;
-  padding: 15px;
-  border-radius: 4px 0 0 4px;
-  width: 743px;
-  font-size: 20px;
-  font-family: 'Times New Roman', Times, serif;
-  border: 1px solid #E0E0E0		;
-  border-radius: 6px;
-  margin-top:63px;
-}
-.todo-input:focus {
-  outline: none;
-}
-.todo-button {
-  position: absolute;
-  margin-top:63px;
-  border: none;
-  right: 0;
-height:55px;
-  padding: 15px;
-  background-color: #0066ff;
-  color: white;
-  cursor: pointer;
-  border-radius: 0px 4px 4px 0px;
-  font-size: 20px;
-  font-family: 'Times New Roman', Times, serif;
-}
-table {
-  border-collapse: collapse;
+main{
   width: 100%;
+  padding: 20px;
 }
-
-th,
-td {
-  text-align: left;
-  padding: 8px;
-  white-space: nowrap;
-  width: fit-content;
-  font-family: 'Times New Roman', Times, serif;
-  color: #595959;
-  font-size: 20px;
-}
-
-tr:nth-child(odd) {
-  background-color: #f2f2f2;
-}
-.RiDeleteBin6Line {
-  color: #f2f2f2;
-  cursor: pointer;
-  height: 20px;
-}
-
-.Faedit {
-  color: #f2f2f2;
-  cursor: pointer;
-  height: 20px;
+.sidebar{
+  
+ 
+  font-size:14px;
+  width: 200px;
+  transition: all 0.5s;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  height: 100%;
+  padding: 30px 15px;
+  width: 100%;
   
 }
-.delete {
-  background-color: #ff6666;
-  border-color: #ff6666;
-  border-radius: 3px;
-}
-.edit {
-  background-color: #04aa6d;
-  border-color: #04aa6d;
-  border-radius: 3px;
-  margin: 5px;
-}
-.react-icon {
-  text-align: right;
-}
-.title {
-  width: 70%;
-}
-.red-input {
-  accent-color: rgb(168, 157, 157);
-  height: 20px; 
-  width:20px;
+.top_section{
+  display: flex;
+  align-items:center;
+  padding:20px 15px;
 }
 
+.link{
+  display: flex;
+  color:#4F6D85;
+  padding: 10px 15px;
+  gap: 15px;
+  transition: all 0.5s;
+}
+.link:hover{
+  background:rgb(228, 233, 236);
+  color: #000;
+  transition: all 0.5s;
+}
+.active{
+ 
+  color: #0066ff;
+}
+.icon, .link_text{
+  font-size: 14px;
+  font-family: effra-arabic;
+}
+
+
+.grid-container {
+  display: grid;
+  gap: 50px 100px;
+  grid-template-columns: auto auto auto;
+  
+ border-radius: 2px solid black;
+  padding: 10px;
+  display:inline-block;
+  background-color: rgb(237, 237, 247);
+}
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+ 
+  padding: 20px;
+  font-size: 15px;
+  text-align: left;
+  width: 265px;
+    height: 100px;
+    
+  border-radius: 6px;
+  display: flex;
+}
+
+
+.grid-item {
+  color: #4F6D85;
+  font-size:14px;
+}
